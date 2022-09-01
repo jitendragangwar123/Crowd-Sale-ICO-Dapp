@@ -46,7 +46,7 @@ tokenInstance.balanceOf(fromAccount)
 tokenInstance.balanceOf(toAccount)
 tokenInstance.allowance(fromAccount,spendingAccount)
 ```
-Export from VSCode to github Repository:
+Export from VsCode to github Repository:
 ```shell
 git config --global user.name "jitendragangwar123"
 git config --global user.email "gangwarjitendra2498@gmail.com"
