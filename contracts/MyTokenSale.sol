@@ -8,6 +8,7 @@ contract MyTokenSale{
     uint public tokenPrice;
     uint public tokenSold;
 
+
     event Sell(address _buyer,uint _amount);
     constructor(MyToken _tokenContract,uint _tokenPrice){
         //Assign An Admin
@@ -34,5 +35,15 @@ contract MyTokenSale{
         tokenSold+=_numberOfTokens;
         //trigger sell event
         emit Sell(msg.sender,_numberOfTokens);
+    }
+    //ending token sale
+    function endSale() public{
+        //require admin
+        require(msg.sender==admin);
+        //transfer remaining dapp tokens to admin
+        require(tokenContract.transfer(admin, tokenContract.balanceOf(address(this))));
+        //destroy contracts
+        selfdestruct(payable(admin));
+
     }
 }

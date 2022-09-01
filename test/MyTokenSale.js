@@ -36,7 +36,6 @@ contract('MyTokenSale',function(accounts){
         }).then(function(receipt){
             numberOfTokens=10;
             return tokenSaleInstance.buyTokens(numberOfTokens,{from:buyer,value:numberOfTokens*tokenPrice});
-            
         }).then(function(receipt){
             assert.equal(receipt.logs.length,1,"triggers one event");
             assert.equal(receipt.logs[0].event,"Sell","Should be the Sell event");
@@ -57,7 +56,34 @@ contract('MyTokenSale',function(accounts){
             assert(error.message.indexOf('revert')>=0,"msg.value must equal numer of tokens in wei");
             return tokenSaleInstance.buyTokens(80000,{from:buyer,value:numberOfTokens*tokenPrice});
         }).then(assert.fail).catch(function(error){
+            // console.log(error.message);
             assert(error.message.indexOf('revert')>=0,"can not purchase more tokens than available");
         });
+    });
+    it("end token sale",function(){
+        return MyToken.deployed().then(function(instance){
+            //grab token instance first
+            tokenInstance=instance;
+            return MyTokenSale.deployed();
+        }).then(function(instance){
+            //then grab token sale instance
+            tokenSaleInstance=instance;
+            //try to end sale from account other than the admin
+            return tokenSaleInstance.endSale({from:buyer});
+
+        }).then(assert.fail).catch(function(error){
+           // console.log(error.message);
+            assert(error.message.toString().indexOf('revert')>=0,"must be admin to end sale ");
+            //end sale as admin
+            return tokenSaleInstance.endSale({from:admin});
+            
+        }).then(function(receipt){
+            return tokenInstance.balanceOf(admin);
+        }).then(function(balance){
+            assert.equal(balance.toNumber(), 999990, "transfer to the admin");
+            return tokenInstance.balanceOf(tokenSaleInstance.address);
+        }).then(function(balance){
+            assert.equal(balance.toNumber(), 0, "transfer all tokens from tokensale address to the admin");
+            })
     });
 })
