@@ -63,7 +63,9 @@ contract MyToken{
         require(allowance[_from][msg.sender]>=_amount);
         //change the balance 
         //update the allowance
-        //transfer event
+        //emit transfer event
+        emit Transfer(_from,_to,_amount);
         //return a boolean
+        return true;
     }
 }   
