@@ -8,20 +8,27 @@ contract MyToken{
     //set the total number of tokens
     //read the total number of tokens
     uint public totalSupply;
-
+    //Transfer event
     event Transfer(
         address indexed _from,
         address indexed _to,
-        uint _amount);
+        uint _amount
+    );
+    //Approve event
+    event Approval(
+        address indexed _owner,
+        address indexed _spender,
+        uint _amount
+    );
 
     mapping(address=>uint) public balanceOf;
+    //allowance => returns the amount which _spender is still allowed to withdraw from _owner.
+    mapping(address=>mapping(address=>uint))public allowance;
 
     //function name same as contract name then it work like a constructor
     //it works as a constructor in solidity for version ^0.4.2
     //but in solidity version ^0.8.0 or more , you can write this function name to constructor
-    //constructor (){
-    // totalSupply=1000;
-    //}
+    
     constructor(string memory _name,string memory _symbol,string memory _standard,uint _initialSupply){
         //Allocate the initial supply
         balanceOf[msg.sender]=_initialSupply;
@@ -41,5 +48,22 @@ contract MyToken{
         balanceOf[_to]+=_amount;
         emit Transfer(msg.sender, _to, _amount);
         return true;
+    }
+    //approve() => allows _spender to withdrraw deom your account multiple times,up to the _value amount.
+    function approve(address _spender,uint _amount) public returns(bool success){
+        allowance[msg.sender][_spender]=_amount;
+        emit Approval(msg.sender, _spender, _amount);
+        return true;
+    }
+    //transferFrom()
+    function transferFrom(address _from,address _to,uint _amount) public returns(bool success){
+        //require _from has enough tokens
+        require(balanceOf[_from]>=_amount);
+        //require allowance is big enough
+        require(allowance[_from][msg.sender]>=_amount);
+        //change the balance 
+        //update the allowance
+        //transfer event
+        //return a boolean
     }
 }   
