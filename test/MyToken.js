@@ -6,14 +6,14 @@ contract('MyToken',function(accounts){
         return MyToken.deployed().then(function(instance){
             tokenInstance=instance;
             return tokenInstance.name();
-        }).then(function(name){
-            assert.equal(name,"GFG Token","Has the Correct Name");
-            return tokenInstance.symbol();
+            }).then(function(name){
+                assert.equal(name,"GFG Token","Has the Correct Name");
+                return tokenInstance.symbol();
 
             }).then(function(symbol){
                 assert.equal(symbol,"GFG","Has the correct Symbol");
                 return tokenInstance.standard();
-            }).then(function(standard){
+            }).then(function(standard){    
                 assert.equal(standard,"GFG Token v1.0","has the correct standard");
             });
         });
@@ -54,3 +54,12 @@ contract('MyToken',function(accounts){
         });
     });
 })
+
+
+
+
+
+
+
+
+

@@ -29,12 +29,13 @@ contract MyToken{
         name=_name;
         symbol=_symbol;
         standard=_standard;
+        
+    }
+    function transfer(address _to,uint _amount)public returns(bool success){
         //transfer
         //exception if account does not have enough amount
         //return a boolean
         //tranfer event
-    }
-    function transfer(address _to,uint _amount)public returns(bool success){
         require(balanceOf[msg.sender] >= _amount);
         balanceOf[msg.sender]-= _amount;
         balanceOf[_to]+=_amount;
