@@ -39,15 +39,18 @@ contract MyToken{
         standard=_standard;
         
     }
+    //transfer function
     function transfer(address _to,uint _amount)public returns(bool success){
-        //transfer
+        
         //exception if account does not have enough amount
-        //return a boolean
-        //tranfer event
+       
+        
         require(balanceOf[msg.sender] >= _amount);
         balanceOf[msg.sender]-= _amount;
         balanceOf[_to]+=_amount;
+        //emit transfer event
         emit Transfer(msg.sender, _to, _amount);
+         //return a boolean
         return true;
     }
     //approve() => allows _spender to withdrraw deom your account multiple times,up to the _value amount.
