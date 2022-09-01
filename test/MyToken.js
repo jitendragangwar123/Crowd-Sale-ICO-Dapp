@@ -1,7 +1,7 @@
-var MyToken=artifacts.require("./MyToken.sol");
+let MyToken=artifacts.require("./MyToken.sol");
 
 contract('MyToken',function(accounts){
-    var tokenInstance;
+    let tokenInstance;
     it("Initializes the contract with the correct value",function(){
         return MyToken.deployed().then(function(instance){
             tokenInstance=instance;

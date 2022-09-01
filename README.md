@@ -46,6 +46,14 @@ tokenInstance.balanceOf(fromAccount)
 tokenInstance.balanceOf(toAccount)
 tokenInstance.allowance(fromAccount,spendingAccount)
 ```
+How the Token Sale works?
+```shell
+Provision tokens to token sale contract
+Set a token price in wei
+Assign an Admin
+By Tokens
+End Sale
+```
 Export from VsCode to github Repository:
 ```shell
 git config --global user.name "jitendragangwar123"
