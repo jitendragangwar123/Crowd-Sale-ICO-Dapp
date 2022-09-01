@@ -16,6 +16,35 @@ totalSupply
 totalSupply.toNumber()
 touch test/MyToken.js
 truffle test
+Truffle migrate –reset
+Truffle console
+MyToken.deployed().then(function(instance){tokenInstance=instance;})
+tokenInstance
+tokenInstance.name()
+tokenInstance.symbol()
+tokenInstance.standard()
+tokenInstance.totalSupply().then(function(s){totalSupply=s;})
+totalSupply
+totalSupply.toNumber()
+acc=await web3.eth.getAccounts()
+tokenInstance.balanceOf(accounts[0]).then(function(bal){balance=bal;})
+balance.toNumber()
+admin=accounts[0]
+receiver=accounts[1]
+tokenInstance.transfer(receiver,1,{from:admin})
+balance.toNumber() //get the updated balance 
+tokenInstance.approve(receiver,100) 
+tokenInstance.allowance(accounts[0],accounts[1])
+fromAccount=accounts[2];
+toAccount=accounts[3];
+spendingAccount=accounts[4];
+tokenInstance.transfer(fromAccount,100,{from:accounts[0]});
+tokenInstance.balanceOf(fromAccount);
+tokenInstance.approve(spendingAccount,10,{from:fromAccount})
+tokenInstance.transferFrom(fromAccount,toAccount,10,{from:spendingAccount})
+tokenInstance.balanceOf(fromAccount)
+tokenInstance.balanceOf(toAccount)
+tokenInstance.allowance(fromAccount,spendingAccount)
 ```
 Export from VSCode to github Repository:
 ```shell
