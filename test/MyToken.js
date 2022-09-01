@@ -101,7 +101,16 @@ contract('MyToken',function(accounts){
             assert.equal(receipt.logs[0].args._from,fromAccount,"logs the account the tokens are transferred from");
             assert.equal(receipt.logs[0].args._to,toAccount,"logs the account the tokens are transferred to");
             assert.equal(receipt.logs[0].args._amount,10,"logs the transfer amount");
-        });
+            return tokenInstance.balanceOf(fromAccount);
+        }).then(function(balance){
+            assert.equal(balance.toNumber(),90,"deducts the amount from the sending account");
+            return tokenInstance.balanceOf(toAccount);
+        }).then(function(balance){
+            assert.equal(balance.toNumber(),10,"adds the amount from the receiving account");
+            return tokenInstance.allowance(fromAccount,spendingAccount);
+        }).then(function(allowance){
+            assert.equal(allowance.toNumber(),0,"deducts the amount from the allowance");
+        })
     });
 })
 

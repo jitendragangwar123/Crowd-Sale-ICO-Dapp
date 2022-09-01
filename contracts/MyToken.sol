@@ -27,6 +27,7 @@ contract MyToken{
 
     //function name same as contract name then it work like a constructor
     //it works as a constructor in solidity for version ^0.4.2
+    // function MyToken(uint _initialSupply) public {}
     //but in solidity version ^0.8.0 or more , you can write this function name to constructor
     
     constructor(string memory _name,string memory _symbol,string memory _standard,uint _initialSupply){
@@ -62,7 +63,10 @@ contract MyToken{
         //require allowance is big enough
         require(allowance[_from][msg.sender]>=_amount);
         //change the balance 
+        balanceOf[_from]-=_amount;
+        balanceOf[_to]+=_amount;
         //update the allowance
+        allowance[_from][msg.sender]-=_amount;
         //emit transfer event
         emit Transfer(_from,_to,_amount);
         //return a boolean
