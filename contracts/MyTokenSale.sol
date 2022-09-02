@@ -7,9 +7,9 @@ contract MyTokenSale{
     MyToken public tokenContract;
     uint public tokenPrice;
     uint public tokenSold;
-
-
+    //Event Sell
     event Sell(address _buyer,uint _amount);
+    
     constructor(MyToken _tokenContract,uint _tokenPrice){
         //Assign An Admin
         admin=msg.sender;
@@ -44,6 +44,5 @@ contract MyTokenSale{
         require(tokenContract.transfer(admin, tokenContract.balanceOf(address(this))));
         //destroy contracts
         selfdestruct(payable(admin));
-
     }
 }

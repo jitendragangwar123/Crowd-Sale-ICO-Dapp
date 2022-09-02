@@ -70,20 +70,19 @@ contract('MyTokenSale',function(accounts){
             tokenSaleInstance=instance;
             //try to end sale from account other than the admin
             return tokenSaleInstance.endSale({from:buyer});
-
         }).then(assert.fail).catch(function(error){
            // console.log(error.message);
             assert(error.message.toString().indexOf('revert')>=0,"must be admin to end sale ");
             //end sale as admin
             return tokenSaleInstance.endSale({from:admin});
-            
         }).then(function(receipt){
             return tokenInstance.balanceOf(admin);
         }).then(function(balance){
-            assert.equal(balance.toNumber(), 999990, "transfer to the admin");
-            return tokenInstance.balanceOf(tokenSaleInstance.address);
-        }).then(function(balance){
-            assert.equal(balance.toNumber(), 0, "transfer all tokens from tokensale address to the admin");
-            })
+            assert.equal(balance.toNumber(), 999990, "returns all unsold GFG Tokens to the admin");
+            //check that token price was reset when selfdestruct was called 
+            return tokenSaleInstance.tokenPrice();
+        }).then(function(price){
+            assert.equal(price.toNumber(), 0, "token price was reset");
+        });
     });
 })
