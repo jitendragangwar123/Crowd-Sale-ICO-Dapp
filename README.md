@@ -1,4 +1,4 @@
-# ICO_Dapp
+# Crowd-Sell-ICO-Dapp
 To create the ICO contract where everyone can buy the token from the owner's wallet by using their wallet address.
 ```shell
 mkdir ICO_Contract
@@ -45,6 +45,19 @@ tokenInstance.transferFrom(fromAccount,toAccount,10,{from:spendingAccount})
 tokenInstance.balanceOf(fromAccount)
 tokenInstance.balanceOf(toAccount)
 tokenInstance.allowance(fromAccount,spendingAccount)
+//Creating Front-End For the ICO
+touch package.json
+//add lite-server in package.json file
+npm run dev
+//for src and build files configuration
+touch bs-config.json
+mkdir src
+mkdir src/css/
+mkdir src/js/
+touch src/index.html
+
+
+
 ```
 How the Token Sale works?
 ```shell
