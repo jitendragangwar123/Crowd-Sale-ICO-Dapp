@@ -124,10 +124,10 @@ App = {
         // Wait for Sell event
       });
     }
-  }
+}
   
   $(function() {
     $(window).load(function() {
       App.init();
     })
-  });
+});
