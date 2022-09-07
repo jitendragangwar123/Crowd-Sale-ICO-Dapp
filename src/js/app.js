@@ -124,7 +124,7 @@ App = {
         // Wait for Sell event
       });
     }
-}
+  }
   
   $(function() {
     $(window).load(function() {
