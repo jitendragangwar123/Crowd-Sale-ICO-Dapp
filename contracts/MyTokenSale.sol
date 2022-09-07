@@ -9,7 +9,7 @@ contract MyTokenSale{
     uint public tokenSold;
     //Event Sell
     event Sell(address _buyer,uint _amount);
-    
+    //Create the constructor
     constructor(MyToken _tokenContract,uint _tokenPrice){
         //Assign An Admin
         admin=msg.sender;
